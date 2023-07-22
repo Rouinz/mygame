@@ -44,6 +44,7 @@ losed = False
 score = 0
 old_score = 0
 chosed = False
+high_score = 0
 
 font = pygame.font.Font('04B_19.TTF',28)
 #main
@@ -100,12 +101,16 @@ while running:
     elif losed:
         over = font.render("Game Over!", True, white,black)
         result = font.render("Your Score: "+str(old_score),True,white,black)
+        high_sc = font.render("High Score: "+str(high_score),True,white,black)
         overRect = over.get_rect()
         resultRect = result.get_rect()
-        overRect.center = (700 // 2, 500 // 2)
+        high_scRect = high_sc.get_rect()
+        overRect.center = (700 // 2, 200)
         resultRect.center = (700 // 2, 300)
+        high_scRect.center = (700 // 2, 500 // 2)
         window.blit(over, overRect)
         window.blit(result, resultRect)
+        window.blit(high_sc, high_scRect)
     elif game_started and not(losed):
         if not(chosed):
             normal = font.render("Normal Mode - Press 2", True, white,black)
@@ -144,6 +149,8 @@ while running:
             elif crash(pygame.draw.rect(window, (0,0,0), (move_x,move_y,40,40))) and game_started: 
                 losed = True
                 game_started = False
+                if high_score <= score:
+                    high_score = score
                 old_score = score
                 score = 0
                 move_x = 300
