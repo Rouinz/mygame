@@ -14,8 +14,8 @@ def point(player,food):
     if player.colliderect(food) and eaten == False:
         score += 1
         eaten = True
-        food_x = r.randint(0,550)
-        food_y = r.randint(0,350)
+        food_x = r.randint(20,680)
+        food_y = r.randint(20,480)
     else:
         eaten = False
     return score
@@ -36,8 +36,8 @@ down = False
 left = False
 right = False
 eaten = False
-food_x = r.randint(0,700)
-food_y = r.randint(0,500)
+food_x = r.randint(20,680)
+food_y = r.randint(20,480)
 drawed = False
 game_started = False
 losed = False
@@ -56,35 +56,35 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN and not(crash(pygame.draw.rect(window, (0,0,0), (move_x,move_y,40,40)))):
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 game_started = True
                 losed = False
             if event.key == pygame.K_1 and game_started and not(losed):
-                velocity = 3
+                velocity = 4
                 chosed = True
             elif event.key == pygame.K_2 and game_started and not(losed):
-                velocity = 5
-                chosed = True
-            elif event.key == pygame.K_3 and game_started and not(losed):
                 velocity = 7
                 chosed = True
-            if event.key == pygame.K_s and game_started and not(losed):
+            elif event.key == pygame.K_3 and game_started and not(losed):
+                velocity = 9
+                chosed = True
+            if game_started and not(losed) and event.key == pygame.K_s:
                 up = False
                 down = True
                 left = False
                 right = False
-            elif event.key == pygame.K_w and game_started and not(losed):
+            elif game_started and not(losed) and event.key == pygame.K_w:
                 up = True
                 down = False
                 left = False
                 right = False
-            elif event.key == pygame.K_a and game_started and not(losed):
+            elif game_started and not(losed) and event.key == pygame.K_a:
                 up = False
                 down = False
                 left = True
                 right = False
-            elif event.key == pygame.K_d and game_started and not(losed):
+            elif game_started and not(losed) and event.key == pygame.K_d:
                 up = False
                 down = False
                 left = False
@@ -155,6 +155,8 @@ while running:
                 score = 0
                 move_x = 300
                 move_y = 300
+                food_x = r.randint(20,680)
+                food_y = r.randint(20,480)
                 up = True
                 down = False
                 left = False
